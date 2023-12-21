@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { debounce } from "../../helper/common";
 const Home = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const getUsers = async () => {
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     const postResponse = await fetch(
@@ -23,12 +24,14 @@ const Home = () => {
       };
     });
     setUsers(result);
+    setLoading(false);
     localStorage.setItem("users", JSON.stringify(result));
   };
 
   const debounceUser = debounce(() => {
     const localStore = localStorage.getItem("users") ?? null;
     if (localStore) {
+      setLoading(false);
       setUsers(JSON.parse(localStore));
     } else {
       getUsers();
@@ -41,25 +44,29 @@ const Home = () => {
   return (
     <div className="container home">
       <h1>Peoples Directory</h1>
-      <ul>
-        {users?.map((item, index) => {
-          return (
-            <Link
-              to={{
-                pathname: `/${(item?.name).trim().replace(/\s/g, "")}/${
-                  item?.id
-                }`,
-              }}
-              key={index}
-            >
-              <li key={index}>
-                <p>Name : {item?.name}</p>
-                <p>Posts : {item?.posts?.length} </p>
-              </li>
-            </Link>
-          );
-        })}
-      </ul>
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <ul>
+          {users?.map((item, index) => {
+            return (
+              <Link
+                to={{
+                  pathname: `/${(item?.name).trim().replace(/\s/g, "")}/${
+                    item?.id
+                  }`,
+                }}
+                key={index}
+              >
+                <li key={index}>
+                  <p>Name : {item?.name}</p>
+                  <p>Posts : {item?.posts?.length} </p>
+                </li>
+              </Link>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };
