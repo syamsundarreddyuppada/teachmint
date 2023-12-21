@@ -12,7 +12,6 @@ export function debounce(func, delay) {
 
 export function updateClock(timeObject) {
   const localTime = moment.tz(timeObject?.datetime, timeObject?.timezone); // Convert seconds to milliseconds
-  console.log(timeObject, localTime);
 
   const hrs = localTime.hours();
   const minutes = localTime.minutes();

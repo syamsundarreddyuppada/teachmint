@@ -4,10 +4,15 @@ import "./profile.scss";
 import PostCard from "../../components/postCard";
 import { debounce } from "../../helper/common";
 import NavSelector from "../../components/navSelector";
+import PostModel from "../../modal/PostModel";
 const Profile = () => {
   const { userId } = useParams();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [modalObj, setModalObj] = useState({
+    title: null,
+    content: null,
+  });
   const getProfile = async () => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/users/${userId}`
@@ -26,6 +31,10 @@ const Profile = () => {
   };
 
   const debouncePosts = debounce(() => getProfile(), 5);
+
+  const handlePost = (title, post) => {
+    setModalObj({ title: title, content: post });
+  };
 
   useEffect(() => {
     debouncePosts();
@@ -66,11 +75,25 @@ const Profile = () => {
           </section>
           <section className="postSection">
             {userData?.postList?.slice(0, 3).map((item, index) => (
-              <PostCard title={item?.title} content={item?.body} key={index} />
+              <PostCard
+                title={item?.title}
+                content={item?.body}
+                key={index}
+                handlePost={handlePost}
+              />
             ))}
           </section>
         </>
       )}
+      {modalObj?.title ? (
+        <PostModel
+          title={modalObj?.title}
+          Content={modalObj?.content}
+          setModalObj={setModalObj}
+        />
+      ) : (
+        ""
+      )}{" "}
     </div>
   );
 };

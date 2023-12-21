@@ -21,7 +21,6 @@ const NavSelector = () => {
     const body = await res.json();
 
     const { hrs, minutes, seconds } = updateClock(body);
-    console.log(hrs, minutes, seconds);
 
     setHours(hrs);
     setMins(minutes);

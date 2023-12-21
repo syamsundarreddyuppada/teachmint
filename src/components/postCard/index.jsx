@@ -1,8 +1,8 @@
 import React from "react";
 import "./post.scss";
-const PostCard = ({ title, content }) => {
+const PostCard = ({ title, content, handlePost }) => {
   return (
-    <div className="postCard">
+    <div className="postCard" onClick={() => handlePost(title, content)}>
       <span>{title}</span>
       <p>{content}</p>
     </div>
