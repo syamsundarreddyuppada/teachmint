@@ -1,0 +1,54 @@
+.profile {
+  padding-bottom: 50px;
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    padding: 20px 0;
+  }
+  h2 {
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .userSection {
+    display: flex;
+    padding: 20px;
+    border: 1px solid rgb(93, 93, 93);
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    gap: 24px;
+    flex-wrap: wrap;
+    cursor: pointer;
+    background: #f3f8ff;
+    &:hover {
+      border: 1px solid rgb(142, 142, 142);
+      color: rgb(32, 41, 65);
+      background: #e1eeff;
+    }
+    span {
+      font-weight: 400;
+    }
+    p {
+      font-weight: 500;
+      span {
+        font-weight: 400;
+      }
+    }
+  }
+  .postSection {
+    padding-top: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .postSection {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,66 @@
+.topNav {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+  a {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 6px 20px;
+    background: #f3f8ff;
+    &:hover {
+      background: #e1eeff;
+    }
+  }
+  button {
+    padding: 8px 12px;
+    background: #64ff9d;
+    border: none;
+    outline: none;
+    color: black;
+    cursor: pointer;
+  }
+  .pause {
+    background: #fa7070;
+  }
+  .rightContent {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    p {
+      text-align: center;
+      background: #161a30;
+      padding: 8px 20px;
+      color: #98e4ff;
+      max-width: 200px;
+      width: 100%;
+      line-height: 16px;
+      letter-spacing: 3px;
+    }
+  }
+
+  @media (max-width:400px) {
+    select{
+      max-width: unset;
+    }
+    .rightContent{
+      p{
+        max-width: unset;
+      }
+      button{
+        width: 100%;
+      }
+
+    }
+  }
+
+  @media (max-width:560px) {
+    .rightContent{
+      flex-wrap: wrap;
+    }
+    
+  }
+}

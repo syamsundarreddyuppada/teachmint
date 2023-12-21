@@ -1,0 +1,16 @@
+select {
+  border: none;
+  outline: none;
+  border-radius: 2.8px;
+  background: var(--grey-50, rgba(229, 229, 230, 0.5));
+  padding: 8px 14px 8px 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("../../assets/triangle-down.svg");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 8px;
+  max-width: 150px;
+  width: 100%;
+  background-size: 16px;
+}
