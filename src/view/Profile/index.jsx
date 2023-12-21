@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import "./profile.scss";
 import PostCard from "../../components/postCard";
 import { debounce } from "../../helper/common";
@@ -12,6 +12,8 @@ const Profile = () => {
   const [modalObj, setModalObj] = useState({
     title: null,
     content: null,
+    postDetails: false,
+    userDetails: false,
   });
   const getProfile = async () => {
     const response = await fetch(
@@ -33,7 +35,11 @@ const Profile = () => {
   const debouncePosts = debounce(() => getProfile(), 5);
 
   const handlePost = (title, post) => {
-    setModalObj({ title: title, content: post });
+    setModalObj({ title: title, content: post, postDetails: true });
+  };
+
+  const handleUser = () => {
+    setModalObj({ ...userData, userDetails: true });
   };
 
   useEffect(() => {
@@ -49,7 +55,7 @@ const Profile = () => {
       ) : (
         <>
           {" "}
-          <section className="userSection">
+          <section className="userSection" onClick={handleUser}>
             <div>
               <p>
                 Name :<span> {userData?.name}</span>
@@ -85,15 +91,16 @@ const Profile = () => {
           </section>
         </>
       )}
-      {modalObj?.title ? (
+      {modalObj?.postDetails | modalObj?.userDetails ? (
         <PostModel
-          title={modalObj?.title}
-          Content={modalObj?.content}
+          postObj={modalObj}
           setModalObj={setModalObj}
+          userDetails={modalObj?.userDetails}
+          title="User Details"
         />
       ) : (
         ""
-      )}{" "}
+      )}
     </div>
   );
 };

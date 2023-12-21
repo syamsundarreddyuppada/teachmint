@@ -13,7 +13,6 @@ const Home = () => {
 
     const userBody = await response.json();
     const result = userBody.map((item) => {
-      // Filter posts for the current user
       const posts = postBody.filter(
         (postItem) => postItem?.userId === item?.id
       );
